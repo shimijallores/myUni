@@ -4,8 +4,8 @@ require('../functions.php');
 require('../partials/database.php');
 
 try {
-    // Delete from rooms table
-    $stmt = $connection->prepare("delete from rooms where id = ?");
+    // Delete from subjects table
+    $stmt = $connection->prepare("delete from subjects where id = ?");
 
     $stmt->execute([$_POST['id']]);
 } catch (Exception $e) {

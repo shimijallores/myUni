@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `audit_trait` (
   CONSTRAINT `FK_audit_trait_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myuni.audit_trait: ~39 rows (approximately)
+-- Dumping data for table myuni.audit_trait: ~7 rows (approximately)
 INSERT INTO `audit_trait` (`id`, `user_id`, `module`, `refno`, `datetime`, `action`) VALUES
 	(1, 1, 'Collections', '0000000004', '2025-11-14 01:55:40', 'A'),
 	(2, 1, 'Collections', '0000000005', '2025-11-14 01:57:45', 'A'),
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `collections` (
   CONSTRAINT `FK_collections_students` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myuni.collections: ~22 rows (approximately)
+-- Dumping data for table myuni.collections: ~26 rows (approximately)
 INSERT INTO `collections` (`id`, `or_number`, `or_date`, `student_id`, `semester_id`, `cash`, `gcash`, `gcash_refno`) VALUES
 	(1, '0000000001', '2025-11-13 15:58:37', 1, 1, 1000.00, 0.00, '0'),
 	(2, '0000000002', '2025-11-13 15:58:37', 1, 1, 0.00, 200.00, '0'),
@@ -210,9 +210,9 @@ CREATE TABLE IF NOT EXISTS `student_subjects` (
   KEY `FK_student_subjects_semesters` (`semester_id`),
   KEY `FK_student_subjects_students` (`student_id`),
   KEY `FK_student_subjects_subjects` (`subject_id`),
-  CONSTRAINT `FK_student_subjects_semesters` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_student_subjects_students` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_student_subjects_subjects` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_student_subjects_semesters` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_student_subjects_students` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_student_subjects_subjects` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myuni.student_subjects: ~14 rows (approximately)
@@ -249,13 +249,14 @@ CREATE TABLE IF NOT EXISTS `subjects` (
   KEY `FK_subjects_teachers` (`teacher_id`),
   CONSTRAINT `FK_subjects_rooms` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_subjects_teachers` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myuni.subjects: ~3 rows (approximately)
 INSERT INTO `subjects` (`id`, `code`, `description`, `days`, `time`, `room_id`, `teacher_id`, `price_unit`, `units`) VALUES
 	(1, 'MATH101', 'Calculus 1', 'Mon/Wed/Fri', '09:00-10:30', 1, 1, 500, 3),
 	(2, 'CS201', 'Data Structures', 'Tue/Thu', '11:00-12:30', 3, 2, 700, 4),
-	(3, 'ENG150', 'Intro to Poetry', 'Mon/Wed', '14:00-15:30', 2, 3, 400, 2);
+	(3, 'ENG150', 'Intro to Poetry', 'Mon/Wed', '14:00-15:30', 2, 3, 400, 2),
+	(8, '1', '1', '1', '1', 3, 1, 1, 1);
 
 -- Dumping structure for table myuni.teachers
 CREATE TABLE IF NOT EXISTS `teachers` (
@@ -266,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myuni.teachers: ~3 rows (approximately)
+-- Dumping data for table myuni.teachers: ~0 rows (approximately)
 INSERT INTO `teachers` (`id`, `code`, `name`) VALUES
 	(1, 'AAAAAAAAAA', 'Dr. Alice Smith'),
 	(2, 'BBBBBBBBBB', 'Prof. John Doe'),
