@@ -25,9 +25,9 @@ CREATE TABLE IF NOT EXISTS `audit_trait` (
   PRIMARY KEY (`id`),
   KEY `FK_audit_trait_users` (`user_id`),
   CONSTRAINT `FK_audit_trait_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myuni.audit_trait: ~42 rows (approximately)
+-- Dumping data for table myuni.audit_trait: ~39 rows (approximately)
 INSERT INTO `audit_trait` (`id`, `user_id`, `module`, `refno`, `datetime`, `action`) VALUES
 	(1, 1, 'Collections', '0000000004', '2025-11-14 01:55:40', 'A'),
 	(2, 1, 'Collections', '0000000005', '2025-11-14 01:57:45', 'A'),
@@ -70,27 +70,40 @@ INSERT INTO `audit_trait` (`id`, `user_id`, `module`, `refno`, `datetime`, `acti
 	(40, 1, 'Collections', '0000000021', '2025-11-19 19:50:38', 'A'),
 	(41, 1, 'Collections', '0000000022', '2025-11-19 19:50:43', 'A'),
 	(42, 1, 'Collections', '0000000023', '2025-11-19 19:50:58', 'A'),
-	(43, 1, 'Collections', '0000000003', '2025-11-19 19:51:58', 'E');
+	(43, 1, 'Collections', '0000000003', '2025-11-19 19:51:58', 'E'),
+	(44, 3, 'Collections', '0000000024', '2025-11-26 22:45:47', 'A'),
+	(45, 3, 'Collections', '0000000024', '2025-11-26 22:46:24', 'E'),
+	(46, 5, 'Collections', '0000000020', '2025-11-26 22:53:28', 'E'),
+	(47, 5, 'Collections', '0000000020', '2025-11-26 22:53:40', 'E'),
+	(48, 5, 'Collections', '0000000020', '2025-11-26 22:53:48', 'E'),
+	(49, 5, 'Collections', '0000000024', '2025-11-26 22:54:02', 'D'),
+	(50, 5, 'Collections', '0000000020', '2025-11-26 22:54:08', 'D'),
+	(51, 5, 'Collections', '0000000024', '2025-11-26 22:54:13', 'A'),
+	(52, 5, 'Collections', '0000000024', '2025-11-26 22:54:17', 'D'),
+	(53, 5, 'Collections', '0000000024', '2025-11-26 22:54:20', 'A'),
+	(54, 5, 'Collections', '0000000025', '2025-11-26 22:54:21', 'A'),
+	(55, 5, 'Collections', '0000000026', '2025-11-26 22:54:22', 'A'),
+	(56, 5, 'Collections', '0000000027', '2025-11-26 22:54:24', 'A');
 
 -- Dumping structure for table myuni.collections
 CREATE TABLE IF NOT EXISTS `collections` (
   `id` int NOT NULL AUTO_INCREMENT,
   `or_number` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
   `or_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `student_id` int DEFAULT NULL,
-  `semester_id` int DEFAULT NULL,
-  `cash` decimal(8,2) NOT NULL DEFAULT '0.00',
-  `gcash` decimal(8,2) NOT NULL DEFAULT '0.00',
-  `gcash_refno` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  `student_id` int NOT NULL,
+  `semester_id` int NOT NULL,
+  `cash` decimal(8,2) DEFAULT '0.00',
+  `gcash` decimal(8,2) DEFAULT '0.00',
+  `gcash_refno` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `or_number` (`or_number`),
   KEY `FK_collections_students` (`student_id`),
   KEY `FK_collections_semesters` (`semester_id`),
   CONSTRAINT `FK_collections_semesters` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`),
   CONSTRAINT `FK_collections_students` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myuni.collections: ~24 rows (approximately)
+-- Dumping data for table myuni.collections: ~22 rows (approximately)
 INSERT INTO `collections` (`id`, `or_number`, `or_date`, `student_id`, `semester_id`, `cash`, `gcash`, `gcash_refno`) VALUES
 	(1, '0000000001', '2025-11-13 15:58:37', 1, 1, 1000.00, 0.00, '0'),
 	(2, '0000000002', '2025-11-13 15:58:37', 1, 1, 0.00, 200.00, '0'),
@@ -109,20 +122,23 @@ INSERT INTO `collections` (`id`, `or_number`, `or_date`, `student_id`, `semester
 	(18, '0000000015', '2025-11-13 20:31:02', 1, 1, 5.00, 0.00, ''),
 	(19, '0000000016', '2025-11-13 20:31:40', 3, 1, 10.00, 10.00, ''),
 	(20, '0000000017', '2025-11-13 20:31:51', 3, 2, 5.00, 10.00, ''),
-	(22, '', '2025-11-19 11:45:34', NULL, 1, 0.00, 0.00, ''),
 	(23, '0000000018', '2025-11-19 11:45:40', 1, 1, 5.00, 0.00, ''),
 	(24, '0000000019', '2025-11-19 11:46:14', 8, 1, 300.00, 0.00, ''),
-	(25, '0000000020', '2025-11-19 11:49:30', 7, 1, 500.00, 0.00, ''),
 	(26, '0000000021', '2025-11-19 11:50:38', 3, 2, 5.00, 0.00, ''),
 	(27, '0000000022', '2025-11-19 11:50:43', 6, 2, 5.00, 0.00, ''),
-	(28, '0000000023', '2025-11-19 11:50:58', 6, 1, 0.00, 5.00, '89as7d89asd');
+	(28, '0000000023', '2025-11-19 11:50:58', 6, 1, 0.00, 5.00, '89as7d89asd'),
+	(31, '0000000024', '2025-11-26 14:54:20', 7, 1, 1500.00, 0.00, ''),
+	(32, '0000000025', '2025-11-26 14:54:21', 7, 1, 0.00, 0.00, ''),
+	(33, '0000000026', '2025-11-26 14:54:22', 7, 1, 0.00, 0.00, ''),
+	(34, '0000000027', '2025-11-26 14:54:24', 7, 1, 0.00, 0.00, '');
 
 -- Dumping structure for table myuni.courses
 CREATE TABLE IF NOT EXISTS `courses` (
   `course_id` int NOT NULL AUTO_INCREMENT,
   `code` varchar(50) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`course_id`)
+  PRIMARY KEY (`course_id`),
+  UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myuni.courses: ~3 rows (approximately)
@@ -135,21 +151,22 @@ INSERT INTO `courses` (`course_id`, `code`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `rooms` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myuni.rooms: ~3 rows (approximately)
 INSERT INTO `rooms` (`id`, `name`) VALUES
+	(3, 'Lab 1'),
 	(1, 'Room A'),
-	(2, 'Room B'),
-	(3, 'Lab 1');
+	(2, 'Room B');
 
 -- Dumping structure for table myuni.semesters
 CREATE TABLE IF NOT EXISTS `semesters` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `start_date` varchar(50) DEFAULT NULL,
-  `end_date` varchar(50) DEFAULT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `start_date` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `end_date` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `summer` varchar(1) NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
@@ -168,6 +185,7 @@ CREATE TABLE IF NOT EXISTS `students` (
   `gender` varchar(10) NOT NULL DEFAULT 'Male',
   `course_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`student_id`),
+  UNIQUE KEY `student_number` (`student_number`),
   KEY `FK_students_courses` (`course_id`),
   CONSTRAINT `FK_students_courses` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -183,9 +201,9 @@ INSERT INTO `students` (`student_id`, `student_number`, `name`, `gender`, `cours
 -- Dumping structure for table myuni.student_subjects
 CREATE TABLE IF NOT EXISTS `student_subjects` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `subject_id` int DEFAULT NULL,
-  `student_id` int DEFAULT NULL,
-  `semester_id` int DEFAULT NULL,
+  `subject_id` int NOT NULL,
+  `student_id` int NOT NULL,
+  `semester_id` int NOT NULL,
   `midterm_grade` decimal(20,6) DEFAULT NULL,
   `final_course_grade` decimal(20,6) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -200,37 +218,38 @@ CREATE TABLE IF NOT EXISTS `student_subjects` (
 -- Dumping data for table myuni.student_subjects: ~14 rows (approximately)
 INSERT INTO `student_subjects` (`id`, `subject_id`, `student_id`, `semester_id`, `midterm_grade`, `final_course_grade`) VALUES
 	(4, 3, 3, 1, 2.000000, 1.750000),
-	(7, 1, 3, 1, 1.000000, 5.000000),
+	(7, 1, 3, 1, 3.000000, 5.000000),
 	(8, 1, 3, 2, 1.500000, NULL),
 	(12, 1, 1, 1, 4.000000, 1.000000),
 	(19, 2, 3, 2, NULL, NULL),
 	(21, 2, 1, 2, NULL, NULL),
 	(22, 3, 1, 2, NULL, 1.750000),
-	(23, 1, 6, 1, 3.000000, 5.000000),
+	(23, 1, 6, 1, 1.000000, 5.000000),
 	(24, 2, 6, 1, 5.000000, 1.000000),
 	(25, 1, 6, 2, NULL, NULL),
 	(26, 2, 6, 2, NULL, NULL),
 	(27, 1, 8, 1, 2.000000, 4.000000),
 	(28, 2, 8, 1, 4.000000, NULL),
-	(29, 1, 7, 1, 4.000000, 3.000000);
+	(29, 1, 7, 1, 5.000000, 3.000000);
 
 -- Dumping structure for table myuni.subjects
 CREATE TABLE IF NOT EXISTS `subjects` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `code` varchar(50) DEFAULT NULL,
-  `description` text,
-  `days` varchar(50) DEFAULT NULL,
-  `time` varchar(50) DEFAULT NULL,
-  `room_id` int DEFAULT NULL,
-  `teacher_id` int DEFAULT NULL,
-  `price_unit` int DEFAULT NULL,
-  `units` int DEFAULT NULL,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `days` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `room_id` int NOT NULL,
+  `teacher_id` int NOT NULL,
+  `price_unit` int NOT NULL,
+  `units` int NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`),
   KEY `FK_subjects_rooms` (`room_id`),
   KEY `FK_subjects_teachers` (`teacher_id`),
-  CONSTRAINT `FK_subjects_rooms` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_subjects_teachers` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FK_subjects_rooms` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_subjects_teachers` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myuni.subjects: ~3 rows (approximately)
 INSERT INTO `subjects` (`id`, `code`, `description`, `days`, `time`, `room_id`, `teacher_id`, `price_unit`, `units`) VALUES
@@ -241,10 +260,11 @@ INSERT INTO `subjects` (`id`, `code`, `description`, `days`, `time`, `room_id`, 
 -- Dumping structure for table myuni.teachers
 CREATE TABLE IF NOT EXISTS `teachers` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `code` varchar(10) DEFAULT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myuni.teachers: ~3 rows (approximately)
 INSERT INTO `teachers` (`id`, `code`, `name`) VALUES
@@ -259,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(250) NOT NULL,
   `role` varchar(50) NOT NULL DEFAULT 'student',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table myuni.users: ~9 rows (approximately)
 INSERT INTO `users` (`id`, `name`, `password`, `role`) VALUES
