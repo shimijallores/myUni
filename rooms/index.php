@@ -8,12 +8,12 @@ if (empty($_SESSION['user'])) {
 }
 
 $stmt = $connection->prepare("
-    select * from teachers
+    select * from rooms
 ");
 
 $stmt->execute();
 
-$teachers = $stmt->fetchAll();
+$rooms = $stmt->fetchAll();
 
 ?>
 
@@ -34,53 +34,51 @@ $teachers = $stmt->fetchAll();
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
-                    <h1 class="text-2xl font-extrabold text-gray-900">Teachers</h1>
+                    <h1 class="text-2xl font-extrabold text-gray-900">Rooms</h1>
                 </div>
                 <a href="create.php"
                     class="inline-flex items-center px-4 py-2 bg-neutral-800 hover:bg-neutral-900 text-white font-medium border border-neutral-800 focus:ring-2 focus:ring-neutral-800 focus:ring-offset-2">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
-                    Add Teacher
+                    Add Rooms
                 </a>
             </div>
         </div>
 
         <!-- Content Area -->
         <div class="p-6">
-            <!-- Teachers Table -->
+            <!-- Rooms Table -->
             <div class="bg-white border border-gray-300">
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead class="bg-gray-50 border-b border-gray-200">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Code</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Name</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            <?php if (empty($teachers)) : ?>
+                            <?php if (empty($rooms)) : ?>
                                 <tr>
                                     <td colspan="5" class="px-6 py-12 text-center text-gray-500">
                                         <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                                         </svg>
-                                        <p class="text-sm">No teachers found.</p>
+                                        <p class="text-sm">No rooms found.</p>
                                     </td>
                                 </tr>
                             <?php else : ?>
-                                <?php foreach ($teachers as $teacher) : ?>
+                                <?php foreach ($rooms as $room) : ?>
                                     <tr class="hover:bg-gray-50">
-                                        <td class="px-6 py-4 text-sm font-medium text-gray-900"><?= htmlspecialchars($teacher['code']) ?></td>
-                                        <td class="px-6 py-4 text-sm text-gray-900"><?= htmlspecialchars($teacher['name']) ?></td>
+                                        <td class="px-6 py-4 text-sm text-gray-900"><?= htmlspecialchars($room['name']) ?></td>
                                         <td class="px-6 py-4">
                                             <div class="flex items-center space-x-2">
-                                                <a href="edit.php?id=<?= $teacher['id'] ?>"
+                                                <a href="edit.php?id=<?= $room['id'] ?>"
                                                     class="px-3 py-1 border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 text-sm font-medium focus:ring-2 focus:ring-neutral-800 focus:ring-offset-2">
                                                     Edit
                                                 </a>
-                                                <button @click="deleteModal = true; deleteId = <?= $teacher['id'] ?>"
+                                                <button @click="deleteModal = true; deleteId = <?= $room['id'] ?>"
                                                     class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium border border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-offset-2">
                                                     Delete
                                                 </button>
