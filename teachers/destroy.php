@@ -3,12 +3,14 @@
 require('../functions.php');
 require('../partials/database.php');
 
-// Delete from students table
+dd($_POST);
+
+// Delete from teachers table
 $stmt = $connection->prepare("
-    delete from students where student_id = ?
+    delete from teachers where id = ?
 ");
 
-$stmt->execute([$_POST['student_id']]);
+$stmt->execute([$_POST['id']]);
 
 header("Location: index.php");
 exit();

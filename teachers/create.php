@@ -7,10 +7,6 @@ if (empty($_SESSION['user'])) {
     exit();
 }
 
-// Fetch Courses
-$stmt = $connection->prepare("select * from courses ORDER BY name");
-$stmt->execute();
-$courses = $stmt->fetchAll();
 ?>
 
 <body class="bg-gray-50" x-data="{ sidebarOpen: false }">
@@ -27,7 +23,7 @@ $courses = $stmt->fetchAll();
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
-                    <h1 class="text-2xl font-extrabold text-gray-900">Create New Student</h1>
+                    <h1 class="text-2xl font-extrabold text-gray-900">Create New Teacher</h1>
                 </div>
             </div>
         </div>
@@ -35,64 +31,42 @@ $courses = $stmt->fetchAll();
         <!-- Content Area -->
         <div class="p-6">
             <div class="max-w-2xl mx-auto">
-                <!-- Student Form -->
+                <!-- Teacher Form -->
                 <div class="bg-white border border-gray-300 p-6">
                     <form action="store.php" method="POST" class="space-y-6">
-                        <!-- Student Number -->
+                        <!-- Teacher Number -->
                         <div class="relative z-0 w-full group">
                             <input type="text"
-                                name="student_number"
-                                id="student_number"
+                                name="code"
+                                id="code"
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-neutral-800 peer"
                                 placeholder=" "
                                 required />
-                            <label for="student_number"
+                            <label for="code"
                                 class="peer-focus:font-medium absolute text-sm text-gray-600 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-neutral-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                Student Number
+                                Teacher Code
                             </label>
                         </div>
 
-                        <!-- Student Name -->
+                        <!-- Teacher Name -->
                         <div class="relative z-0 w-full group">
                             <input type="text"
-                                name="student_name"
-                                id="student_name"
+                                name="name"
+                                id="name"
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-neutral-800 peer"
                                 placeholder=" "
                                 required />
-                            <label for="student_name"
+                            <label for="name"
                                 class="peer-focus:font-medium absolute text-sm text-gray-600 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-neutral-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                 Full Name
                             </label>
-                        </div>
-
-                        <!-- Gender -->
-                        <div>
-                            <label for="gender" class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
-                            <select name="gender" id="gender"
-                                class="w-full px-3 py-2 border border-gray-300 bg-white focus:ring-neutral-800 focus:border-neutral-800">
-                                <option value="M">Male</option>
-                                <option value="F">Female</option>
-                            </select>
-                        </div>
-
-                        <!-- Course -->
-                        <div>
-                            <label for="course" class="block text-sm font-medium text-gray-700 mb-2">Course</label>
-                            <select name="course" id="course"
-                                class="w-full px-3 py-2 border border-gray-300 bg-white focus:ring-neutral-800 focus:border-neutral-800">
-                                <option value="">Select Course</option>
-                                <?php foreach ($courses as $course): ?>
-                                    <option value="<?= $course['course_id'] ?>"><?= htmlspecialchars($course['name']) ?></option>
-                                <?php endforeach; ?>
-                            </select>
                         </div>
 
                         <!-- Action Buttons -->
                         <div class="flex items-center space-x-4">
                             <button type="submit"
                                 class="flex-1 px-4 py-2 bg-neutral-800 hover:bg-neutral-900 text-white font-medium border border-neutral-800 focus:ring-2 focus:ring-neutral-800 focus:ring-offset-2">
-                                Add Student
+                                Add Teacher
                             </button>
                             <a href="index.php"
                                 class="px-4 py-2 border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium focus:ring-2 focus:ring-neutral-800 focus:ring-offset-2">

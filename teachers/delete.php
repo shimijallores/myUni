@@ -15,7 +15,7 @@
         <!-- Dialog Header -->
         <div class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
             <h3 id="deleteModalTitle" class="text-lg font-medium text-gray-900">
-                Delete Student
+                Delete Teacher
             </h3>
             <button type="button" x-on:click="deleteModal = false" aria-label="close modal" class="text-gray-400 hover:text-gray-600">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -26,7 +26,7 @@
 
         <!-- Dialog Body -->
         <div class="px-6 py-6">
-            <input type="hidden" name="student_id" :value="deleteId">
+            <input type="hidden" name="id" :value="deleteId">
             <div class="flex items-start space-x-3">
                 <div class="flex-shrink-0">
                     <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +35,7 @@
                 </div>
                 <div>
                     <h4 class="text-sm font-medium text-gray-900 mb-1">Confirm Deletion</h4>
-                    <p class="text-sm text-gray-600">Are you sure you want to delete this student? This action cannot be undone and will permanently remove all associated records.</p>
+                    <p class="text-sm text-gray-600">Are you sure you want to delete this teacher? This action cannot be undone and will permanently remove all associated records.</p>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
             </button>
             <button type="submit"
                 class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium border border-red-600 focus:ring-2 focus:ring-red-600 focus:ring-offset-2">
-                Delete Student
+                Delete Teacher
             </button>
         </div>
     </form>
