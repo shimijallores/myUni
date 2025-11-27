@@ -14,7 +14,6 @@ $stmt = $connection->prepare("
 $stmt->execute();
 
 $subjects = $stmt->fetchAll();
-
 ?>
 
 <body class="bg-gray-50" x-data="{ sidebarOpen: false, deleteModal: false, deleteId: null }">

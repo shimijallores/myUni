@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `audit_trait` (
   CONSTRAINT `FK_audit_trait_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myuni.audit_trait: ~7 rows (approximately)
+-- Dumping data for table myuni.audit_trait: ~55 rows (approximately)
 INSERT INTO `audit_trait` (`id`, `user_id`, `module`, `refno`, `datetime`, `action`) VALUES
 	(1, 1, 'Collections', '0000000004', '2025-11-14 01:55:40', 'A'),
 	(2, 1, 'Collections', '0000000005', '2025-11-14 01:57:45', 'A'),
@@ -83,7 +83,9 @@ INSERT INTO `audit_trait` (`id`, `user_id`, `module`, `refno`, `datetime`, `acti
 	(53, 5, 'Collections', '0000000024', '2025-11-26 22:54:20', 'A'),
 	(54, 5, 'Collections', '0000000025', '2025-11-26 22:54:21', 'A'),
 	(55, 5, 'Collections', '0000000026', '2025-11-26 22:54:22', 'A'),
-	(56, 5, 'Collections', '0000000027', '2025-11-26 22:54:24', 'A');
+	(56, 5, 'Collections', '0000000027', '2025-11-26 22:54:24', 'A'),
+	(57, 5, 'Collections', '0000000028', '2025-11-27 22:53:27', 'A'),
+	(58, 5, 'Collections', '0000000029', '2025-11-27 22:53:38', 'A');
 
 -- Dumping structure for table myuni.collections
 CREATE TABLE IF NOT EXISTS `collections` (
@@ -130,7 +132,9 @@ INSERT INTO `collections` (`id`, `or_number`, `or_date`, `student_id`, `semester
 	(31, '0000000024', '2025-11-26 14:54:20', 7, 1, 1500.00, 0.00, ''),
 	(32, '0000000025', '2025-11-26 14:54:21', 7, 1, 0.00, 0.00, ''),
 	(33, '0000000026', '2025-11-26 14:54:22', 7, 1, 0.00, 0.00, ''),
-	(34, '0000000027', '2025-11-26 14:54:24', 7, 1, 0.00, 0.00, '');
+	(34, '0000000027', '2025-11-26 14:54:24', 7, 1, 0.00, 0.00, ''),
+	(35, '0000000028', '2025-11-27 14:53:27', 8, 2, 500.00, 0.00, ''),
+	(36, '0000000029', '2025-11-27 14:53:38', 8, 2, 0.00, 10.00, 'gcash try');
 
 -- Dumping structure for table myuni.courses
 CREATE TABLE IF NOT EXISTS `courses` (
@@ -228,9 +232,10 @@ INSERT INTO `student_subjects` (`id`, `subject_id`, `student_id`, `semester_id`,
 	(24, 2, 6, 1, 5.000000, 1.000000),
 	(25, 1, 6, 2, NULL, NULL),
 	(26, 2, 6, 2, NULL, NULL),
-	(27, 1, 8, 1, 2.000000, 4.000000),
+	(27, 1, 8, 1, 2.000000, 1.000000),
 	(28, 2, 8, 1, 4.000000, NULL),
-	(29, 1, 7, 1, 5.000000, 3.000000);
+	(29, 1, 7, 1, 5.000000, 3.000000),
+	(30, 1, 8, 2, NULL, NULL);
 
 -- Dumping structure for table myuni.subjects
 CREATE TABLE IF NOT EXISTS `subjects` (
@@ -251,12 +256,11 @@ CREATE TABLE IF NOT EXISTS `subjects` (
   CONSTRAINT `FK_subjects_teachers` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myuni.subjects: ~3 rows (approximately)
+-- Dumping data for table myuni.subjects: ~4 rows (approximately)
 INSERT INTO `subjects` (`id`, `code`, `description`, `days`, `time`, `room_id`, `teacher_id`, `price_unit`, `units`) VALUES
 	(1, 'MATH101', 'Calculus 1', 'Mon/Wed/Fri', '09:00-10:30', 1, 1, 500, 3),
 	(2, 'CS201', 'Data Structures', 'Tue/Thu', '11:00-12:30', 3, 2, 700, 4),
-	(3, 'ENG150', 'Intro to Poetry', 'Mon/Wed', '14:00-15:30', 2, 3, 400, 2),
-	(8, '1', '1', '1', '1', 3, 1, 1, 1);
+	(3, 'ENG150', 'Intro to Poetry', 'Mon/Wed', '14:00-15:30', 2, 3, 400, 2);
 
 -- Dumping structure for table myuni.teachers
 CREATE TABLE IF NOT EXISTS `teachers` (
@@ -267,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table myuni.teachers: ~0 rows (approximately)
+-- Dumping data for table myuni.teachers: ~3 rows (approximately)
 INSERT INTO `teachers` (`id`, `code`, `name`) VALUES
 	(1, 'AAAAAAAAAA', 'Dr. Alice Smith'),
 	(2, 'BBBBBBBBBB', 'Prof. John Doe'),
