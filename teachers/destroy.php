@@ -3,14 +3,17 @@
 require('../functions.php');
 require('../partials/database.php');
 
-dd($_POST);
+try {
+    // Delete from teachers table
+    $stmt = $connection->prepare("delete from teachers where id = ?");
 
-// Delete from teachers table
-$stmt = $connection->prepare("
-    delete from teachers where id = ?
-");
+    $stmt->execute([$_POST['id']]);
+} catch (Exception $e) {
+    $_SESSION['redirect'] = 'index.php';
 
-$stmt->execute([$_POST['id']]);
+    header("Location: 404.php");
+    exit();
+}
 
 header("Location: index.php");
 exit();
