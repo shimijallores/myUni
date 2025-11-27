@@ -12,6 +12,12 @@ try {
 ");
 
     $stmt->execute([$_POST['code'], $_POST['name']]);
+
+    $stmt = $connection->prepare("
+    insert into users (name, password, role) values (?, ?, ?);
+");
+
+    $stmt->execute([$_POST['code'], $_POST['code'], 'teacher']);
 } catch (Exception $e) {
     $_SESSION['redirect'] = 'create.php';
 
