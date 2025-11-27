@@ -5,19 +5,12 @@ require('../partials/database.php');
 
 session_start();
 
-// Store new teacher to students table
+
+// Add new room
 try {
-    $stmt = $connection->prepare("
-    insert into teachers (code, name) values (?, ?);
-");
+    $stmt = $connection->prepare("insert into rooms (name) values (?);");
 
-    $stmt->execute([$_POST['code'], $_POST['name']]);
-
-    $stmt = $connection->prepare("
-    insert into users (name, password, role) values (?, ?, ?);
-");
-
-    $stmt->execute([$_POST['code'], $_POST['code'], 'teacher']);
+    $stmt->execute([$_POST['name']]);
 } catch (Exception $e) {
     $_SESSION['redirect'] = 'create.php';
 

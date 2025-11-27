@@ -7,14 +7,14 @@ if (empty($_SESSION['user'])) {
     exit();
 }
 
-// Fetch Teacher
+// Fetch Room
 $stmt = $connection->prepare("
-    select * from teachers where id = ?;
+    select * from rooms where id = ?;
 ");
 $stmt->execute([$_GET['id']]);
-$teacher = $stmt->fetch();
+$room = $stmt->fetch();
 
-if (!$teacher) {
+if (!$room) {
     header('location: index.php');
     exit();
 }
@@ -39,7 +39,7 @@ $courses = $stmt->fetchAll();
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
-                    <h1 class="text-2xl font-extrabold text-gray-900">Edit Teacher</h1>
+                    <h1 class="text-2xl font-extrabold text-gray-900">Edit Room</h1>
                 </div>
             </div>
         </div>
@@ -47,45 +47,29 @@ $courses = $stmt->fetchAll();
         <!-- Content Area -->
         <div class="p-6">
             <div class="max-w-2xl mx-auto">
-                <!-- Teacher Info Card -->
+                <!-- Room Info Card -->
                 <div class="bg-white border border-gray-300 p-6 mb-6">
-                    <h2 class="text-lg font-medium text-gray-900 mb-2">Editing: <?= htmlspecialchars($teacher['name']) ?></h2>
-                    <p class="text-sm text-gray-600">Teacher Code: <?= htmlspecialchars($teacher['code']) ?></p>
+                    <h2 class="text-lg font-medium text-gray-900 mb-2">Editing: <?= htmlspecialchars($room['name']) ?></h2>
                 </div>
 
                 <!-- Edit Form -->
                 <div class="bg-white border border-gray-300 p-6">
                     <form action="update.php" method="POST" class="space-y-6">
-                        <!-- Current teacher id -->
-                        <input type="hidden" name="id" value="<?= $teacher['id'] ?>">
+                        <!-- Current room id -->
+                        <input type="hidden" name="id" value="<?= $room['id'] ?>">
 
-                        <!-- Teacher Number -->
-                        <div class="relative z-0 w-full group">
-                            <input type="text"
-                                name="code"
-                                id="code"
-                                value="<?= htmlspecialchars($teacher['code']) ?>"
-                                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-neutral-800 peer"
-                                placeholder=" "
-                                required />
-                            <label for="code"
-                                class="peer-focus:font-medium absolute text-sm text-gray-600 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-neutral-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                Teacher Number
-                            </label>
-                        </div>
-
-                        <!-- Teacher Name -->
+                        <!-- Room Name -->
                         <div class="relative z-0 w-full group">
                             <input type="text"
                                 name="name"
                                 id="name"
-                                value="<?= htmlspecialchars($teacher['name']) ?>"
+                                value="<?= htmlspecialchars($room['name']) ?>"
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-neutral-800 peer"
                                 placeholder=" "
                                 required />
                             <label for="name"
                                 class="peer-focus:font-medium absolute text-sm text-gray-600 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-neutral-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                Full Name
+                                Room Name/Code
                             </label>
                         </div>
 
@@ -94,7 +78,7 @@ $courses = $stmt->fetchAll();
                         <div class="flex items-center space-x-4">
                             <button type="submit"
                                 class="flex-1 px-4 py-2 bg-neutral-800 hover:bg-neutral-900 text-white font-medium border border-neutral-800 focus:ring-2 focus:ring-neutral-800 focus:ring-offset-2">
-                                Update Teacher Info
+                                Update Room Info
                             </button>
                             <a href="index.php"
                                 class="px-4 py-2 border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-medium focus:ring-2 focus:ring-neutral-800 focus:ring-offset-2">
